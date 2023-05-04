@@ -1,0 +1,89 @@
+@page
+@model Miro.Pages.Accounts.LoginModel
+@{
+    Layout = null;
+    var persianCalendar = new System.Globalization.PersianCalendar();
+    var persianYear = persianCalendar.GetYear(DateTime.UtcNow);
+}
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - miro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/miro.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/@(nameof(Miro)).styles.css" />
+    <meta name="theme-color" content="#712cf9">
+    
+    <style>
+          html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+    <main class="form-signin w-100 m-auto">
+        <form method="post">
+            <img class="mb-4" src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">لطفا وارد شوید</h1>
+
+            <div class="form-floating">
+                <input type="email" asp-for="Email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label asp-for="Email">ایمیل</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" asp-for="Password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label asp-for="Password">پسورد</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> مرا به یاد بیاور
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">ورود</button>
+            <p class="mt-5 mb-3 text-muted">&copy; @persianYear - احسان میرمحمدی</p>
+        </form>
+    </main>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+  </body>
+</html>

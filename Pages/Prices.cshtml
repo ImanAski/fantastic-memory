@@ -1,0 +1,54 @@
+@page "/prices"
+@model Miro.Pages.PricesModel
+@inject MiroDbContext DbContext
+@{
+    ViewData["title"] = "قیمت ها";
+}
+
+@section Styles {
+    
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+
+}
+
+<div class="table table-resonsive">
+    <table class="table table-striped table-hover" id="pricesTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>نام محصول</th>
+        <th>توضیحات</th>
+        <th>قیمت</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in DbContext.Product) {
+            <tr>
+                <td>@product.ID</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.PriceFormatted</td>
+            </tr>
+        }
+    </tbody>
+  </table>
+</div>
+
+@section Scripts {
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#pricesTable').DataTable( {
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Persian.json"
+                }
+            });
+        });
+    </script>
+
+}

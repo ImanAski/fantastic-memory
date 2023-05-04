@@ -1,0 +1,163 @@
+@page
+@inject MiroDbContext DbContext
+@model Miro.Pages.Admin.ProductModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<p>@ViewData["Error"]</p>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Products</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                                                <td>Stock Status</td>
+
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <td>Stock Status</td>
+                        <th>Actions</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var product in DbContext.Product) {
+                        <tr>
+                            <td>@product.ID</td>
+                            <td>@product.Name</td>
+                            <td>@product.Description</td>
+                            <td>@product.PriceFormatted</td>
+                            <td>@product.InStockFormattedEn</td>
+                            <td>
+                              <div class="d-flex">
+                                <button type="button" data-toggle="modal" data-target="#editProdutModal-@product.ID" class="btn btn-info d-inline mx-1">
+                                  Edit
+                                </button>
+                                <!-- User Edit Modal -->
+                                <div class="modal fade" id="editProdutModal-@product.ID" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="createUserModalLabel">Edit Product #@product.ID - @product.Name</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form asp-page="" asp-page-handler="edit">
+                                          <input type="hidden" name="ID" value="@product.ID">
+                                          <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" name="Name" value="@product.Name" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <input type="text" class="form-control" id="description" value="@product.Description" name="Description">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="price">Price</label>
+                                            <input type="number" class="form-control" id="price" value="@product.Price" name="Price">
+                                          </div>
+                                          <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" value="@product.InStock" id="inStock" name="InStock">
+                                            <label class="form-check-label" for="inStock">In Stock</label>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Edit Product</button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <form asp-page="" asp-page-handler="delete">
+                                  <input type="hidden" name="ID" value="@product.ID">
+                                  <button class="btn btn-danger form-control d-inline mx-1">
+                                    Delete
+                                  </button>
+                                </form>
+                              </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section createButton{
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProductModal">
+  Create New Product
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="createProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createProductModalLabel">Create New Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="Name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="Description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" name="Price" required>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="inStock" name="InStock">
+            <label class="form-check-label" for="inStock">In Stock</label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+}
+
+@section Styles{
+    <!-- Page level plugins -->
+    <script src="~/lib/sb-admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/sb-admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+}
+

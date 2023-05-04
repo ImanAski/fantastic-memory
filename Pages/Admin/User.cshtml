@@ -1,0 +1,159 @@
+@page
+@inject MiroDbContext DbContext
+@model Miro.Pages.Admin.UserModel
+@{
+    ViewData["Title"] = "User Page";
+}
+
+  <p>@ViewData["Error"]</p>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Users</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var user in DbContext.User) {
+                        <tr>
+                            <td>@user.ID</td>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td>@user.Role</td>
+                            <td>
+                              <div class="d-flex">
+                                <button type="button" data-toggle="modal" data-target="#editUserModal-@user.ID" class="btn btn-info d-inline mx-1">
+                                  Edit
+                                </button>
+                                <!-- User Edit Modal -->
+                                <div class="modal fade" id="editUserModal-@user.ID" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="createUserModalLabel">Edit User #@user.ID - @user.Email</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form asp-page="" asp-page-handler="edit">
+                                          <input type="hidden" name="ID" value="@user.ID">
+                                          <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" value="@user.Email" name="Email" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" name="Name" value="@user.Name" required>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" placeholder="Change it only in critical situation" name="Password">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="role">Role</label>
+                                            <input type="text" class="form-control" id="role" value="@user.Role" name="Role">
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Create User</button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <form asp-page="" asp-page-handler="delete">
+                                  <input type="hidden" name="ID" value="@user.ID">
+                                  <button class="btn btn-danger form-control d-inline mx-1">
+                                    Delete
+                                  </button>
+                                </form>
+                              </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section createButton{
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUserModal">
+    Create New User
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createUserModalLabel">Create New User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" asp-page="">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="Email" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="Name" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="Password">
+            </div>
+            <div class="form-group">
+              <label for="role">Role</label>
+              <input type="text" class="form-control" id="role" name="Role">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Create User</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+
+@section Styles{
+    <!-- Page level plugins -->
+    <script src="~/lib/sb-admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/sb-admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+}
+

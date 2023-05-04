@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\miro.props" />
+</Project>
