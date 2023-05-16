@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aGd0BdUZPsTCQk+K/PLozhxOqdb77jaQUYuyf0k+yg0QzP3t1rTgMWDPerzKk5gT0Soqj+epspXnacFHeWfosA==",
+  "dgSpecHash": "7qSxVdrCMCwQmy0No0G6dboChgLtBr+EcAqkgwkzvuq9OvAGUhl0z37oKklSp6NO21kQhfYl2EscC+XOuhqx5w==",
   "success": true,
   "projectFilePath": "E:\\Programming\\dotnet\\miro\\miro.csproj",
   "expectedPackageFiles": [
@@ -26,7 +26,8 @@
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\zarinpal-sdk\\0.0.8\\zarinpal-sdk.0.0.8.nupkg.sha512"
   ],
   "logs": []
 }

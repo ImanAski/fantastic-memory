@@ -1,0 +1,113 @@
+@page
+@model Miro.Pages.CartModel
+@using System.Text.Json;
+@using Miro.Models;
+@using Miro.Helpers;
+@{
+    ViewData["Title"] = "سبد خرید";
+    List<CartItem> cart = new List<CartItem>();
+}
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="p-5">
+                  <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-bold mb-0 text-black">سبد خرید</h1>
+                    <h6 class="mb-0 text-muted">@Model.Cart.Count محصول</h6>
+                  </div>
+                  <hr class="my-4">
+
+                  @foreach (var product in @Model.Cart)
+                  {
+                  <div class="row mb-4 d-flex justify-content-between">
+                    @* <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
+                        class="img-fluid rounded-3" alt="Cotton T-shirt">
+                    </div> *@
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <h6 class="text-muted"></h6>
+                      <h6 class="text-black mb-0">@product.Name</h6>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+
+                      <input id="form1" min="0" name="quantity" value="@product.Quantity" type="number"
+                        class="form-control form-control-sm" />
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      <h6 class="mb-0">@product.PriceFormatted</h6>
+                    </div>
+                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                        <form asp-page="cart" asp-page-handler="removefromcart" method="post">
+                            <input type="hidden" name="id" value="@product.Id" />
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                  </div>
+
+                  <hr class="my-4">
+                    
+                  }
+                  
+
+                  <div class="pt-5">
+                    <h6 class="mb-0"><a asp-page="prices" class="text-body text-decoration-none"><i
+                          class="fas fa-long-arrow-alt-right me-2"></i>بازگشت به محصولات</a></h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">خلاصه</h3>
+                  <hr class="my-4">
+
+                  <div class="d-flex justify-content-between mb-4">
+                    <h5 class="text-uppercase">@Model.Cart.Count محصول</h5>
+                    <h5>@Model.CartTotalString</h5>
+                  </div>
+
+                  <h5 class="text-uppercase mb-3">نحوه ارسال</h5>
+
+                  <div class="mb-4 pb-2">
+                    <select class="form-select">
+                      <option value="1">Standard-Delivery- €5.00</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                      <option value="4">Four</option>
+                    </select>
+                  </div>
+
+                  <h5 class="text-uppercase mb-3">کد تخفیف</h5>
+
+                  <div class="mb-5">
+                    <div class="form-outline">
+                      <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                    </div>
+                  </div>
+
+                  <hr class="my-4">
+
+                  <div class="d-flex justify-content-between mb-5">
+                    <h5 class="text-uppercase">مجموع</h5>
+                    <h5>@Model.CartTotalString</h5>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-dark btn-block btn-lg"
+                        data-mdb-ripple-color="dark">ادامه</button>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

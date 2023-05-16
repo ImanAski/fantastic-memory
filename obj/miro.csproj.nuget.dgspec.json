@@ -50,6 +50,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "ZarinPal-SDK": {
+              "target": "Package",
+              "version": "[0.0.8, )"
             }
           },
           "imports": [

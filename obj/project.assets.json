@@ -399,6 +399,9 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "ZarinPal-SDK/0.0.8": {
+        "type": "package"
       }
     }
   },
@@ -1017,12 +1020,25 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "ZarinPal-SDK/0.0.8": {
+      "sha512": "ZT1OjcK6XV5XbldvCGMPB2SPvqMSu2DDTgcBb0QfCuhjJ3XZkFostGN9+FAOIjfU56fRFnlefkBqMuBmWgoezg==",
+      "type": "package",
+      "path": "zarinpal-sdk/0.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ZarinPal.dll",
+        "zarinpal-sdk.0.0.8.nupkg.sha512",
+        "zarinpal-sdk.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.4"
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.4",
+      "ZarinPal-SDK >= 0.0.8"
     ]
   },
   "packageFolders": {
@@ -1074,6 +1090,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[7.0.4, )"
+          },
+          "ZarinPal-SDK": {
+            "target": "Package",
+            "version": "[0.0.8, )"
           }
         },
         "imports": [
