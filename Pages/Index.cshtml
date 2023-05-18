@@ -3,8 +3,184 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@section Styles{
+    <link rel="stylesheet" href="~/@(nameof(Miro)).styles.css" />
+    <style>
+        #intro-upper {
+            height: 500px;
+            @* background-image: url('/lib/Images/first-back.jpg'); *@
+            background-color: hsl(0, 0%, 94%);
+        }
 
-<div class="text-center">
-    <h1 class="display-4">احسان میرمحمدی</h1>
-    <p>هر متنی میتواند اینجا باشد.</p>
+        #intro-lower {
+            margin-top: -240px;
+        }
+    </style>
+}
+
+<div id="intro-upper" class="pb-5">
+
+    <div class="container pt-4">
+
+      <h1 class="display-4 pt-5 fw-bold ls-tight text-primary">احسان میرمحمدی</h1>
+      <p class="text-dark pb-5">
+        <span>شعاری برای این وبسایت</span>
+      </p>
+
+    </div>
+
 </div>
+
+<div id="intro-lower" class="mb-10">
+
+    <div class="container">
+      <div class="row g-0 align-items-center">
+        <div class="col-xl-7 mb-4 mb-xl-0">
+          <img src="https://blog-tutorial.mdbgo.io/assets/featured.jpg" class="w-100 rounded-6" alt="Backpacker" />
+        </div>
+        <div class="col-xl-5 ms-0 ms-xl-n5">
+          <div class="card rounded-6 shadow-5">
+            <div class="card-body px-4 p-4 p-md-5 p-lg-4 p-xl-5">
+              <h4 class="mb-4">سرویس ما بهترین است
+              </h4>
+              <p class="text-muted mb-4">این متن برای تست امکانات این وبسایت است. لطفا انی متن را عوض کنید. ممنون.</p>
+              <button class="btn btn-primary btn-rounded">کلیدی برای رفتن<i
+                  class="fas fa-angle-left ms-1"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<!--Main layout-->
+<main>
+  <div class="container">
+
+<!-- Section: Products -->
+<section class="text-center mb-10">
+    
+  <h3 class="fw-bold mb-7 text-center">آخرین محصولات</h3>
+
+  <div class="row gx-lg-5">
+
+    @foreach (var product in Model.LatesProducts)
+    {
+        <!-- Column -->
+        <div class="col-lg-4 col-md-12 mb-7">
+
+        <div class="card rounded-6 h-100">
+            <div class="bg-image hover-overlay ripple mx-3 shadow-4-strong rounded-6 mt-n3"
+            data-mdb-ripple-color="light">
+            <img src="https://blog-tutorial.mdbgo.io/assets/1.jpg" class="w-100">
+
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </a>
+
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+
+            <div class="text-muted">
+                @product.Description
+            </div>
+            <p class="text text-primary ">@product.PriceFormatted</p>
+            <form method="post" asp-page="cart" asp-page-handler="addtocart">
+                <input type="hidden" name="id" value="@product.ID" />
+                <button type="submit" @(product.InStock ? null : "disabled") class="btn btn-@(product.InStock ? "primary" : "danger text-white")">
+                <i class="fa fa-add"></i> اضافه به سبد خرید
+                </button>
+            
+            </form>
+            </div>
+        </div>
+
+        </div>
+        <!-- Column -->
+    }
+
+  </div>
+
+  <a class="btn btn-secondary btn-rounded" asp-area="" asp-page="/Prices" role="button">محصولات بیشتر...</a>
+
+</section>
+<!-- Section: Products -->
+
+  </div>
+</main>
+<!--Main layout-->
+
+
+
+
+<!-- Section: Contact -->
+<section class="mb-10 text-center">
+
+  <div class="container">
+
+      <h3 class="fw-bold mb-7 text-center">با ما در ارتباط باشید</h3>
+
+
+    <div class="row gx-0 align-items-center">
+
+      <!-- First column -->
+<div class="col-lg-6 mb-5 mb-lg-0">
+
+  <div style="background: hsla(0, 0%, 100%, 0.55);
+  backdrop-filter: blur(30px);
+  z-index: 1;" class="card rounded-7 me-lg-n5">
+    <div class="card-body p-lg-5 shadow-5">
+      <form>
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+          <input type="text" id="form4Example1" class="form-control" />
+          <label class="form-label" for="form4Example1">Name</label>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <input type="email" id="form4Example2" class="form-control" />
+          <label class="form-label" for="form4Example2">Email address</label>
+        </div>
+
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+          <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+          <label class="form-label" for="form4Example3">Message</label>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-check d-flex justify-content-center mb-4">
+          <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
+          <label class="form-check-label" for="form4Example4">
+            Send me a copy of this message
+          </label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- First column -->
+
+      <!-- Second column -->
+      <div class="col-lg-6 mb-5 mb-lg-0">
+
+        <div class="ratio ratio-1x1">
+            <iframe class="shadow-3-strong rounded-7" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4015.7677202494815!2d51.68714739967651!3d32.65416816027354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sde!4v1684364173589!5m2!1sen!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
+        </div>
+
+      </div>
+      <!-- Second column -->
+
+    </div>
+
+  </div>
+
+</section>
+<!-- Section: Contact -->

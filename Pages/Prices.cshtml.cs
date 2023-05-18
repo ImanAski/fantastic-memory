@@ -13,6 +13,7 @@ public class PricesModel : PageModel
     public int PageIndex { get; set; }
     public int TotalPages { get; set; }
     public string SearchTerm { get; set; }
+    public int AllProducts { get; set; }
 
     public PricesModel(ILogger<PricesModel> logger, MiroDbContext dbContext)
     {
@@ -23,6 +24,8 @@ public class PricesModel : PageModel
     public async Task OnGetAsync(string searchTerm, int? pageIndex)
     {
         IQueryable<Product> products = _dbContext.Product;
+
+        AllProducts = await products.CountAsync();
 
         if (!string.IsNullOrEmpty(searchTerm))
         {

@@ -19,26 +19,37 @@
     
     </style>
 }
-
+<div class="container">
+    <main role="main" class="p-3">
+        
 <form method="get">
-    <div class="col-md-3 input-group mb-3">
-        <input type="text" name="searchTerm" class="form-control" placeholder="جستجو در بین @(Model.Products.Count) محصول و خدمت...">
+    <div class="col-md-3 input-group mb-5">
+        <input type="text" name="searchTerm" class="form-control" placeholder="جستجو در بین @(Model.AllProducts) محصول و خدمت...">
     
     <button type="submit" class="btn btn-primary">جستجو</button>
     </div>
 </form>
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="row row-cols-1 row-cols-md-2 g-4 text-center">
     @foreach (var product in Model.Products)
     {
-    <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="card p-2">
-        <img src="https://greendroprecycling.com/wp-content/uploads/2017/04/GreenDrop_Station_Aluminum_Can_Pepsi.jpg" alt="#" />
-        <div class="card-body">
-            <h3 class="card-title">
-            @product.Name
-            </h3>
-            <div class="card-content">
+    <!-- Column -->
+        <div class="col-lg-4 col-md-12 mb-7">
+
+        <div class="card rounded-6 h-100">
+            <div class="bg-image hover-overlay ripple mx-3 shadow-4-strong rounded-6 mt-n3"
+            data-mdb-ripple-color="light">
+            <img src="https://blog-tutorial.mdbgo.io/assets/1.jpg" class="w-100">
+
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </a>
+
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+
+            <div class="text-muted">
                 @product.Description
             </div>
             <p class="text text-primary ">@product.PriceFormatted</p>
@@ -49,20 +60,40 @@
                 </button>
             
             </form>
+            </div>
         </div>
+
         </div>
-    </div>
+        <!-- Column -->
     }
 </div>
-<nav aria-label="Page navigation">
-    <ul class="pagination">
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                <a class="page-link" href="?pageIndex=@i@(Model.SearchTerm != null ? "&searchTerm=" + Model.SearchTerm : "")">@i</a>
+<nav aria-label="Page navigation" class="m-5">
+        <ul class="pagination justify-content-center p-2 m-2">
+            @if (Model.Products.Count > 0)
+            {
+            <li class="page-item">
+                    <a class="page-link @(Model.PageIndex == 1 ? "disabled" : null)" href="?pageIndex=@(Model.PageIndex-1)@(Model.SearchTerm != null ? "&searchTerm=" + Model.SearchTerm : "")" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
             </li>
-        }
-    </ul>
+            }
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link" href="?pageIndex=@i@(Model.SearchTerm != null ? "&searchTerm=" + Model.SearchTerm : "")">@i</a>
+                </li>
+                
+            }
+            @if (Model.Products.Count > 0)
+            {
+            <li class="page-item">
+                    <a class="page-link @(Model.PageIndex == Model.TotalPages ? "disabled" : null)" href="?pageIndex=@(Model.PageIndex+1)@(Model.SearchTerm != null ? "&searchTerm=" + Model.SearchTerm : "")" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+            </li>
+            }
+        </ul>
 </nav>
 
 @section Scripts {
@@ -82,3 +113,5 @@
     </script>
 
 }
+    </main>
+</div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "q4deai0vZJabZJweC46co3VcuVkdtvWC14aR2YG4yl0=",
+  "Hash": "4HO5LRnszJr1wyTT8aTdDuoI4VBBo+4PKEPEdAY5u5Q=",
   "Source": "miro",
   "BasePath": "_content/miro",
   "Mode": "Default",
@@ -865,6 +865,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
+    },
+    {
+      "Identity": "E:\\Programming\\dotnet\\miro\\wwwroot\\lib\\Images\\first-back.jpg",
+      "SourceId": "miro",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Programming\\dotnet\\miro\\wwwroot\\",
+      "BasePath": "_content/miro",
+      "RelativePath": "lib/Images/first-back.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\Images\\first-back.jpg"
     },
     {
       "Identity": "E:\\Programming\\dotnet\\miro\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",

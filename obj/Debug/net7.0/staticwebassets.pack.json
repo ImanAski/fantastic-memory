@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "E:\\Programming\\dotnet\\miro\\wwwroot\\lib\\Images\\first-back.jpg",
+      "PackagePath": "staticwebassets\\lib\\Images\\first-back.jpg"
+    },
+    {
       "Id": "E:\\Programming\\dotnet\\miro\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

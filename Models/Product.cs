@@ -13,6 +13,7 @@ public class Product
     [Required]
     public decimal Price { get; set; }
     public bool InStock { get; set; }
+    public DateTime DateAdded { get; set; }
 
     public string PriceFormatted
     {

@@ -1,0 +1,15 @@
+
+
+@media (max-width: 767.98px) {
+    #intro-upper {
+        height: 500px;
+    }
+}
+
+
+
+@media (max-width: 767.98px) {
+    #intro-lower {
+        margin-top: -270px;
+    }
+}
