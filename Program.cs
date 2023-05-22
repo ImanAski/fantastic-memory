@@ -75,6 +75,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<MiroDbContext>();
     DbInitializer.Initialize(context);
+    PostInitializer.Initialize(context);
 }
 
 app.Run();

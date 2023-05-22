@@ -1,0 +1,68 @@
+﻿@page
+@inject MiroDbContext DbContext
+@model Miro.Pages.Admin.Post
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+@functions
+{
+    string TruncateHtml(string input, int length = 300, 
+        string ommission = "...")
+    {
+        if (input == null || input.Length < length)
+            return input;
+        int iNextSpace = input.LastIndexOf(" ", length);
+        return string.Format("{0}" + ommission, input.Substring(0, (iNextSpace > 0) ? 
+            iNextSpace : length).Trim());
+    }
+}
+
+<p>@ViewData["Error"]</p>
+
+<!-- DataTable For Posts -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Posts</h6>
+    </div>
+    
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" collspacing="0">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach (var post in DbContext.Post)
+                {
+                    <tr>
+                        <td>@post.Id</td>
+                        @if (!String.IsNullOrWhiteSpace(post.ImageFileName))
+                        {
+                          <td><img src="/images/@post.ImageFileName" alt="@post.Title" width="70px" height="70px"/></td>
+                        }else {
+                          <td>No Image</td>
+                        }
+                        <td>@post.Title</td>
+                        <td>@TruncateHtml(post.Content,120)</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

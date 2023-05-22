@@ -11,6 +11,7 @@ public class Product
     [Required]
     public String Description { get; set; }
     [Required]
+    public string ImageFileName { get; set; }
     public decimal Price { get; set; }
     public bool InStock { get; set; }
     public DateTime DateAdded { get; set; }

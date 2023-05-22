@@ -13,37 +13,59 @@ namespace Miro.Pages.Admin
         public Product product { get; set; }
         [BindProperty]
         public int ID { get; set; }
+        [BindProperty]
+        public IFormFile ImageFile { get; set; }
+        private readonly IWebHostEnvironment _environment;
 
-
-        public ProductModel(ILogger<ProductModel> logger, MiroDbContext context)
+        public ProductModel(ILogger<ProductModel> logger, MiroDbContext context, IWebHostEnvironment environment)
         {
+            _environment = environment;
             _context = context;
             _logger = logger;
         }
 
         public void OnGet()
         {
-            
+
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostCreate()
         {
-            if (!ModelState.IsValid)
+            // var InStock = Request.Form["InStock"] == "on";
+
+            // var insertProduct = new Product{
+            //     Name = product.Name,
+            //     Description = product.Description,
+            //     Price = product.Price,
+            //     InStock = InStock,
+            //     ImageFileName = product.ImageFileName
+            // };
+
+            if (ImageFile != null)
             {
-                return Page();
+                var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(ImageFile.FileName)}";
+                var filePath = Path.Combine(_environment.WebRootPath, "images", fileName);
+
+                if (!Directory.Exists(_environment.WebRootPath + "/images"))
+                {
+                    Directory.CreateDirectory(_environment.WebRootPath + "/images");
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(stream);
+                }
+
+                product.ImageFileName = fileName;
             }
 
-            var insertProduct = new Product{
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                InStock = product.InStock
-            };
-
-            try{
+            try
+            {
                 await _context.Product.AddAsync(product);
                 await _context.SaveChangesAsync();
-            }catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 ViewData["Error"] = e.Message;
                 return Page();
             }
@@ -61,10 +83,13 @@ namespace Miro.Pages.Admin
                 ViewData["Error"] = "No Product Found";
                 return Page();
             }
-            try {
+            try
+            {
                 _context.Product.Remove(product);
                 await _context.SaveChangesAsync();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 ViewData["Error"] = e.Message;
                 return Page();
             }
@@ -82,18 +107,43 @@ namespace Miro.Pages.Admin
                 return Page();
             }
 
+            if (ImageFile != null)
+            {
+                var fileName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(ImageFile.FileName)}";
+                var filePath = Path.Combine(_environment.WebRootPath, "images", fileName);
+
+                if (filePath != newProduct.ImageFileName)
+                {
+                    if (!Directory.Exists(_environment.WebRootPath + "/images"))
+                    {
+                        Directory.CreateDirectory(_environment.WebRootPath + "/images");
+                    }
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(stream);
+                    }
+
+                    newProduct.ImageFileName = fileName;
+
+                }
+
+
+            }
+
             newProduct.Name = product.Name;
             newProduct.Description = product.Description;
             newProduct.Price = product.Price;
             newProduct.InStock = Request.Form["InStock"] == "on";
 
-            try{
+            try
+            {
                 _context.Product.Update(newProduct);
                 await _context.SaveChangesAsync();
             }
             catch (Exception e)
             {
-                ViewData["Error"] = e.Message; 
+                ViewData["Error"] = e.Message;
                 return Page();
             }
 

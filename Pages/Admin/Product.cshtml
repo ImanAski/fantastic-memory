@@ -1,4 +1,4 @@
-@page
+  @page
 @inject MiroDbContext DbContext
 @model Miro.Pages.Admin.ProductModel
 @{
@@ -18,17 +18,18 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <td>Image</td>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                                                <td>Stock Status</td>
-
+                        <td>Stock Status</td>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>#</th>
+                        <td>Image</td>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
@@ -40,6 +41,12 @@
                     @foreach (var product in DbContext.Product) {
                         <tr>
                             <td>@product.ID</td>
+                            @if (!String.IsNullOrWhiteSpace(product.ImageFileName))
+                            {
+                              <td><img src="/images/@product.ImageFileName" alt="@product.Description" width="70px" height="70px"/></td>
+                            }else {
+                              <td>No Image</td>
+                            }
                             <td>@product.Name</td>
                             <td>@product.Description</td>
                             <td>@product.PriceFormatted</td>
@@ -62,6 +69,10 @@
                                       <div class="modal-body">
                                         <form asp-page="" asp-page-handler="edit">
                                           <input type="hidden" name="ID" value="@product.ID">
+                                          <div class="form-group">
+                                            <label for="imageFile">Image</label>
+                                            <input type="file" asp-for="ImageFile" id="imageFile" class="form-control">
+                                          </div>
                                           <div class="form-group">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" id="name" name="Name" value="@product.Name" required>
@@ -114,27 +125,32 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="createProductModalLabel">Create New Product</h5>
+        <h5 class="modal-title" id="createProductModalLabel">محصول جدید</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="post">
+        <form asp-page="" asp-page-handler="create" enctype="multipart/form-data">
+          <input type="hidden" name="ID" value="0">
+          <div class="form-group">
+            <label for="imageFile">Image</label>
+            <input type="file" asp-for="ImageFile" id="imageFile" class="form-control">
+          </div>
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="Name" required>
+            <input type="text" class="form-control" id="name" asp-for="product.Name" required>
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="Description" required></textarea>
+            <textarea class="form-control" id="description" asp-for="product.Description" required></textarea>
           </div>
           <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" name="Price" required>
+            <input type="number" class="form-control" id="price" asp-for="product.Price" required>
           </div>
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="inStock" name="InStock">
+            <input type="checkbox" class="form-check-input" id="inStock" asp-for="product.InStock">
             <label class="form-check-label" for="inStock">In Stock</label>
           </div>
           <div class="modal-footer">

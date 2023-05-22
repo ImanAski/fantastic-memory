@@ -73,6 +73,10 @@ public class CartHelper
         return price.ToString("#,##0 تومان");
     }
 
+    public static string FormatPrice(decimal price)
+    {
+        return price.ToString("#,##0 تومان");
+    }
     public decimal GetCartTotal()
     {
         var cart = GetCart();
