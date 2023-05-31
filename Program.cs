@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Miro.Data;
 using Miro.Helpers;
+using miro.Services.Impl;
+using miro.Services.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -36,6 +38,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpClient();
 
 builder.Services.AddSession(options =>
 {
@@ -46,6 +49,7 @@ builder.Services.AddSession(options =>
 
 // builder.Services.AddSingleton<CartHelper>();
 builder.Services.AddScoped<CartHelper>();
+builder.Services.AddScoped<IPaymentService, ZarinpalService>();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
