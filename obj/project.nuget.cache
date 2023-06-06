@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7qSxVdrCMCwQmy0No0G6dboChgLtBr+EcAqkgwkzvuq9OvAGUhl0z37oKklSp6NO21kQhfYl2EscC+XOuhqx5w==",
+  "dgSpecHash": "hz2PHWp7R5+Tc/YSOD10FAMN8ML9XX5KYGgjc6ZnaU1ug+miAbhqCOOtCjI+McwWpvlFxWLbOV+K+X9cYKeqFg==",
   "success": true,
   "projectFilePath": "E:\\Programming\\dotnet\\miro\\miro.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "C:\\Users\\Sophoskiaskile\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

@@ -43,3 +43,6 @@ E:\Programming\dotnet\miro\obj\Debug\net7.0\scopedcss\projectbundle\miro.bundle.
 E:\Programming\dotnet\miro\obj\Debug\net7.0\scopedcss\Pages\Accounts\Login.cshtml.rz.scp.css
 E:\Programming\dotnet\miro\obj\Debug\net7.0\scopedcss\Pages\Admin\_Layout.cshtml.rz.scp.css
 E:\Programming\dotnet\miro\obj\Debug\net7.0\scopedcss\Pages\Index.cshtml.rz.scp.css
+E:\Programming\dotnet\miro\bin\Debug\net7.0\Data\shipment\cities.json
+E:\Programming\dotnet\miro\bin\Debug\net7.0\Data\shipment\provinces.json
+E:\Programming\dotnet\miro\bin\Debug\net7.0\Newtonsoft.Json.dll

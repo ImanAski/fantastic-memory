@@ -11,8 +11,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     <PackageReference Include="ZarinPal-SDK" Version="0.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\shipment\" />
   </ItemGroup>
 
 </Project>
